@@ -7,7 +7,6 @@ apt_repository "brightbox-ruby-ng-#{node['lsb']['codename']}" do
   keyserver    "keyserver.ubuntu.com"
   key          "C3173AA6"
   action       :add
-  notifies     :run, "execute[apt-get update]", :immediately
 end
 
 ["build-essential", "ruby1.9.1-full", "ruby-switch"].each do |name|
@@ -31,10 +30,4 @@ end
   gem_package gem do
     action :install
   end
-end
-
-# Regenerate the binstups for rubygems-bundler.
-execute "gem regenerate_binstubs" do
-  action :nothing
-  subscribes :run, resources('gem_package[rubygems-bundler]')
 end
