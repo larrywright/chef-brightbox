@@ -20,6 +20,11 @@ if node["brightbox"]["ruby"]["active_version"] == "1.9.1"
     action :run
     not_if "ruby-switch --check | grep -q 'ruby1.9.1'"
   end
+else
+  execute "ruby-switch --set ruby1.8" do
+    action :run
+    not_if "ruby-switch --check | grep -q 'ruby1.8'"
+  end
 end
 
 cookbook_file "/etc/gemrc" do
