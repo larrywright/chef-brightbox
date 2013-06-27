@@ -6,8 +6,8 @@ include_recipe "brightbox::ruby"
   end
 end
 
-cookbook_file "/etc/nginx/conf.d/passenger.conf" do
-  source 'passenger.conf'
+template "/etc/nginx/conf.d/passenger.conf" do
+  source 'passenger.conf.erb'
   mode   '0644'
 end
 
